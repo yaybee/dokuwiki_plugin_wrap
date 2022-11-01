@@ -6,6 +6,12 @@
  * @author     Andreas Gohr <andi@splitbrain.org>
  */
 
+// must be run within Dokuwiki
+if(!defined('DOKU_INC')) die();
+
+if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
+require_once(DOKU_PLUGIN.'action.php');
+
 class action_plugin_wrap extends DokuWiki_Action_Plugin {
 
     /**
@@ -21,7 +27,36 @@ class action_plugin_wrap extends DokuWiki_Action_Plugin {
     function handle_toolbar(Doku_Event $event, $param) {
         $syntaxDiv = $this->getConf('syntaxDiv');
         $syntaxSpan = $this->getConf('syntaxSpan');
-
+        $syntaxNoteAlign = $this->getConf('syntaxNoteAlign'); 
+        $syntaxNoteSize = $this->getConf('syntaxNoteSize');
+        /* Omitting Mode and Type will result in original layout as defined in style.less */
+        if ($this->getConf('syntaxNoteMode') == 'standard') {
+            $syntaxNoteMode = '';
+        } else {
+            $syntaxNoteMode = $this->getConf('syntaxNoteMode');
+        }
+        if ($this->getConf('syntaxNoteType') == 'rectangle') {
+            $syntaxNoteType = '';
+        } else {
+            $syntaxNoteType = $this->getConf('syntaxNoteType');
+        }
+        $syntaxNoteHeadings = array('', '', '', '', '', '', '');
+        if ($this->getConf('syntaxNoteHeadingSize') == 'H3') {
+            $startHeading = '==== ';
+            $endHeading = ' ====\n';
+        } else {
+            $startHeading = '=== ';
+            $endHeading = ' ===\n';
+        }
+        if ($this->getConf('syntaxNoteMode') == 'note modern' || $this->getConf('syntaxNoteHeading')) {
+            $syntaxNoteHeadings = array($startHeading.$this->getLang('alert-text').$endHeading,
+                                        $startHeading.$this->getLang('download-text').$endHeading,
+                                        $startHeading.$this->getLang('help-text').$endHeading, 
+                                        $startHeading.$this->getLang('important-text').$endHeading,
+                                        $startHeading.$this->getLang('info-text').$endHeading,
+                                        $startHeading.$this->getLang('tip-text').$endHeading,
+                                        $startHeading.$this->getLang('todo-text').$endHeading);
+        }
         $event->data[] = array (
             'type' => 'picker',
             'title' => $this->getLang('picker'),
@@ -38,56 +73,56 @@ class action_plugin_wrap extends DokuWiki_Action_Plugin {
                     'type'   => 'format',
                     'title'  => $this->getLang('box'),
                     'icon'   => '../../plugins/wrap/images/toolbar/box.png',
-                    'open'   => '<'.$syntaxDiv.' center round box 60%>\n',
+                    'open'   => '<'.$syntaxDiv.' center box '.$syntaxNoteSize.'>\n',
                     'close'  => '\n</'.$syntaxDiv.'>\n',
                 ),
                 array(
                     'type'   => 'format',
-                    'title'  => $this->getLang('info'),
+                    'title'  => $this->getLang('info'), 
                     'icon'   => '../../plugins/wrap/images/note/16/info.png',
-                    'open'   => '<'.$syntaxDiv.' center round info 60%>\n',
+                    'open'   => '<'.$syntaxDiv.' '.$syntaxNoteMode.' '.$syntaxNoteAlign.' '.$syntaxNoteType.' info '.$syntaxNoteSize.'>\n'.$syntaxNoteHeadings[4],
                     'close'  => '\n</'.$syntaxDiv.'>\n',
                 ),
                 array(
                     'type'   => 'format',
                     'title'  => $this->getLang('tip'),
                     'icon'   => '../../plugins/wrap/images/note/16/tip.png',
-                    'open'   => '<'.$syntaxDiv.' center round tip 60%>\n',
+                    'open'   => '<'.$syntaxDiv.' '.$syntaxNoteMode.' '.$syntaxNoteAlign.' '.$syntaxNoteType.' tip '.$syntaxNoteSize.'>\n'.$syntaxNoteHeadings[5],
                     'close'  => '\n</'.$syntaxDiv.'>\n',
                 ),
                 array(
                     'type'   => 'format',
                     'title'  => $this->getLang('important'),
                     'icon'   => '../../plugins/wrap/images/note/16/important.png',
-                    'open'   => '<'.$syntaxDiv.' center round important 60%>\n',
+                    'open'   => '<'.$syntaxDiv.' '.$syntaxNoteMode.' '.$syntaxNoteAlign.' '.$syntaxNoteType.' important '.$syntaxNoteSize.'>\n'.$syntaxNoteHeadings[3],
                     'close'  => '\n</'.$syntaxDiv.'>\n',
                 ),
                 array(
                     'type'   => 'format',
                     'title'  => $this->getLang('alert'),
                     'icon'   => '../../plugins/wrap/images/note/16/alert.png',
-                    'open'   => '<'.$syntaxDiv.' center round alert 60%>\n',
+                    'open'   => '<'.$syntaxDiv.' '.$syntaxNoteMode.' '.$syntaxNoteAlign.' '.$syntaxNoteType.' alert '.$syntaxNoteSize.'>\n'.$syntaxNoteHeadings[0],
                     'close'  => '\n</'.$syntaxDiv.'>\n',
                 ),
                 array(
                     'type'   => 'format',
                     'title'  => $this->getLang('help'),
                     'icon'   => '../../plugins/wrap/images/note/16/help.png',
-                    'open'   => '<'.$syntaxDiv.' center round help 60%>\n',
+                    'open'   => '<'.$syntaxDiv.' '.$syntaxNoteMode.' '.$syntaxNoteAlign.' '.$syntaxNoteType.' help '.$syntaxNoteSize.'>\n'.$syntaxNoteHeadings[2],
                     'close'  => '\n</'.$syntaxDiv.'>\n',
                 ),
                 array(
                     'type'   => 'format',
                     'title'  => $this->getLang('download'),
                     'icon'   => '../../plugins/wrap/images/note/16/download.png',
-                    'open'   => '<'.$syntaxDiv.' center round download 60%>\n',
+                    'open'   => '<'.$syntaxDiv.' '.$syntaxNoteMode.' '.$syntaxNoteAlign.' '.$syntaxNoteType.' download '.$syntaxNoteSize.'>\n'.$syntaxNoteHeadings[1],
                     'close'  => '\n</'.$syntaxDiv.'>\n',
                 ),
                 array(
                     'type'   => 'format',
                     'title'  => $this->getLang('todo'),
                     'icon'   => '../../plugins/wrap/images/note/16/todo.png',
-                    'open'   => '<'.$syntaxDiv.' center round todo 60%>\n',
+                    'open'   => '<'.$syntaxDiv.' '.$syntaxNoteMode.' '.$syntaxNoteAlign.' '.$syntaxNoteType.' todo '.$syntaxNoteSize.'>\n'.$syntaxNoteHeadings[6],
                     'close'  => '\n</'.$syntaxDiv.'>\n',
                 ),
                 array(

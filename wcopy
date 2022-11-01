@@ -1,0 +1,18 @@
+#!/bin/bash
+cp -v ./action.php /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./example.txt /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./original_example.txt /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./helper.php /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./pdf.less /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./plugin.info.txt /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./print.less /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./README /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./all.less /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./style.less /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./userstyle.less /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v ./conf/default.php /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap/conf
+cp -v ./conf/metadata.php /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap/conf
+cp -v ./lang/en/* /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap/lang/en
+cp -v ./lang/nl/* /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap/lang/nl
+cp -v ./images/README /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap
+cp -v -r ./images/svg /<dokuwiki-base-dir>/config/dokuwiki/lib/plugins/wrap/images

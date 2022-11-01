@@ -9,7 +9,9 @@
 class helper_plugin_wrap extends DokuWiki_Plugin {
     static protected $boxes = array ('wrap_box', 'wrap_danger', 'wrap_warning', 'wrap_caution', 'wrap_notice', 'wrap_safety',
                                      'wrap_info', 'wrap_important', 'wrap_alert', 'wrap_tip', 'wrap_help', 'wrap_todo',
-                                     'wrap_download', 'wrap_hi', 'wrap_spoiler');
+                                     'wrap_download', 'wrap_hi', 'wrap_spoiler',
+                                     'wrap_note', 'wrap_snote', 'wrap_quote', 'wrap_announce'
+                                    );
     static protected $paragraphs = array ('wrap_leftalign', 'wrap_rightalign', 'wrap_centeralign', 'wrap_justify');
 
 	/* list of languages which normally use RTL scripts */

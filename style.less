@@ -1,17 +1,325 @@
 /********************************************************************
-Screen Styles for the Wrap Plugin (additional to all.css)
+Screen Styles for the Wrap Plugin (additional to all.less)
 ********************************************************************/
+
+/* All wrap plugin specific colors are now defined as variables
+********************************************************************
+  :root is for the light templates and
+  .darkModeWrapPlugin for the dark templates
+  
+  Note: theme="dark" needs to be an attribute of the
+  html tag of a dokuwiki page to switch to dark mode
+  OR theme='auto' AND the user has set his browser to dark mode  
+  OR the wrap plugin config setting is set to dark template
+*/
+
+/* The new colours of the Wrap Plugin: 
+*/
+:root {
+    --wrap-default-color: @ini_text;
+    --wrap-red-color: #c00;
+    --wrap-green-color: #090;
+    --wrap-purple-color: #800080;
+    --wrap-orange-color: #f60;
+    --wrap-blue-color: #00f;
+    --wrap-yellow-color: #d7ca04;
+    --wrap-aqua-color: #2a8d8d;
+    --wrap-white-color: #fff;
+    --wrap-black-color: #000;
+ 
+    --wrap-default-dark-bgcolor: @ini_background_neu;
+    --wrap-red-dark-bgcolor: #ffd3d7;
+    --wrap-green-dark-bgcolor: #ceffd2;
+    --wrap-purple-dark-bgcolor: #fad8ff;
+    --wrap-orange-dark-bgcolor: #ffe0b2;
+    --wrap-blue-dark-bgcolor: #cfe8fb;
+    --wrap-yellow-dark-bgcolor: #fff9c4;
+    --wrap-aqua-dark-bgcolor: #d4fbf5;
+  
+    --wrap-default-bgcolor: @ini_background_alt;
+    --wrap-red-bgcolor: #fff3f0;
+    --wrap-green-bgcolor: #f6fff0;
+    --wrap-purple-bgcolor: #fff0ff;
+    --wrap-orange-bgcolor: #fff9f6;
+    --wrap-blue-bgcolor: #f0f8ff;
+    --wrap-yellow-bgcolor: #fffff0;
+    --wrap-aqua-bgcolor: #f0fffa;
+ 	
+    --wrap-danger-bgcolor: #c00;
+    --wrap-warning-bgcolor: #f60;
+    --wrap-caution-bgcolor: #ff0;
+    --wrap-notice-bgcolor: #06f;
+    --wrap-safety-bgcolor: #090;
+	
+    --wrap-hi-bgcolor: #ff9;
+    --wrap-em-color: #c00;
+    --wrap-spoiler-color: #ff0000;
+
+    --wrap-neutral-color: @ini_text_neu;
+    --wrap-alt-color: @ini_text_alt;
+    --wrap-neutral-bgcolor: @ini_background_neu;
+    --wrap-alt-bgcolor: @ini_background_alt;
+
+    /* special variables */
+    --wrap-box-border: none;
+    --wrap-note-border: none;
+    --wrap-quote-border: none;
+}
+
+.darkModeWrapPlugin {
+    --wrap-red-color: #ff2c2c;
+    --wrap-green-color: #01d201;
+    --wrap-purple-color: #f405f4;
+    --wrap-orange-color: #ff781f;
+    --wrap-blue-color: #9191ff;
+    --wrap-yellow-color: #ecdd00;
+    --wrap-aqua-color: #00c6c6;
+
+     --wrap-red-dark-bgcolor: rgba(255, 0, 0, 0.5);
+    --wrap-green-dark-bgcolor: rgba(0, 128, 0, 0.5);
+    --wrap-purple-dark-bgcolor: rgba(187, 3, 187, 0.55);
+    --wrap-orange-dark-bgcolor: rgba(255, 166, 0, 0.5);
+    --wrap-blue-dark-bgcolor: rgba(0, 0, 255, 0.5);
+    --wrap-yellow-dark-bgcolor: rgba(255, 255, 0, 0.5);
+    --wrap-aqua-dark-bgcolor: rgba(0, 167, 109, 0.5);
+
+    --wrap-danger-bgcolor: rgba(204, 0, 0, 0.85);
+    --wrap-warning-bgcolor: rgba(255, 102, 0, 0.85);
+    --wrap-caution-bgcolor: rgba(255, 255, 0, 0.85);
+    --wrap-notice-bgcolor: rgba(0, 102, 255, 0.85);
+    --wrap-safety-bgcolor: rgba(0, 153, 0, 0.85);
+
+    --wrap-red-bgcolor: #6b1100; 
+    --wrap-green-bgcolor: #345717;
+    --wrap-purple-bgcolor: #340655;
+    --wrap-orange-bgcolor: #6c3b00;
+    --wrap-blue-bgcolor: #05336a;
+    --wrap-yellow-bgcolor: #6f6604;
+    --wrap-aqua-bgcolor: #17573e;
+
+    --wrap-hi-bgcolor: #4e4e0d;
+    --wrap-em-color: #f66;
+}
+
+/* The standard (original) colours of the Wrap Plugin: 
+*/
+:root {
+    --wrap-default-sbgcolor: #eee;
+	--wrap-red-sbgcolor: #ffbcaf;
+    --wrap-green-sbgcolor: #d6efc2;
+    --wrap-purple-sbgcolor: #dcc2ef;
+    --wrap-orange-sbgcolor: #ffd39f;
+    --wrap-blue-sbgcolor: #d1d7df;
+    --wrap-yellow-sbgcolor: #fff79f;
+    --wrap-aqua-sbgcolor: #c2efea;
+}
+
+.darkModeWrapPlugin {
+    --wrap-default-sbgcolor: #555555;
+    --wrap-red-sbgcolor: #6b1100; 
+    --wrap-green-sbgcolor: #345717;
+    --wrap-purple-sbgcolor: #3c1757;
+    --wrap-orange-sbgcolor: #6c3b00;
+    --wrap-blue-sbgcolor: #343e4a;
+    --wrap-yellow-sbgcolor: #4a4400;
+    --wrap-aqua-sbgcolor: #17573e;
+}
+
+/* dark theme on template is set
+OR wrap plugin config setting is set to dark
+*/
+:root[theme="dark"],
+.wrap__dark {
+    .darkModeWrapPlugin();
+}
+
+/* User prefers dark theme while theme on template is set to auto 
+*/
+@media (prefers-color-scheme: dark){
+    :root[theme="auto"] {
+        .darkModeWrapPlugin();
+    }
+}
+
+
+/* new svg images as variables
+*******************************************************************
+*/
+:root {
+    --wrap-div-svg-alert: url(images/svg/div-alert.svg);
+    --wrap-div-svg-download: url(images/svg/div-download.svg);
+    --wrap-div-svg-help: url(images/svg/div-help.svg);
+    --wrap-div-svg-important: url(images/svg/div-important.svg);
+    --wrap-div-svg-info: url(images/svg/div-info.svg);
+    --wrap-div-svg-tip: url(images/svg/div-tip.svg);
+    --wrap-div-svg-todo: url(images/svg/div-todo.svg);
+    --wrap-span-svg-alert: url(images/svg/span-alert.svg);
+    --wrap-span-svg-download: url(images/svg/span-download.svg);
+    --wrap-span-svg-help: url(images/svg/span-help.svg);
+    --wrap-span-svg-important: url(images/svg/span-important.svg);
+    --wrap-span-svg-info: url(images/svg/span-info.svg);
+    --wrap-span-svg-tip: url(images/svg/span-tip.svg);
+    --wrap-span-svg-todo: url(images/svg/span-todo.svg);
+    --wrap-svg-quote-up: url(images/svg/quote-up.svg);
+    --wrap-svg-quote-down: url(images/svg/quote-down.svg);
+    --wrap-div-svg-safety: url(images/svg/div-safety.svg);
+    --wrap-span-svg-safety: url(images/svg/span-safety.svg);
+}
 
 .dokuwiki {
 
-/* box
-********************************************************************/
-
-.wrap_box {
-    background: @ini_background_alt;
-    color: @ini_text;
+/* attribute class variable assignment (colour & images)
+*******************************************************************
+   setting default values of css variables: 
+*/
+div, span {
+    /* wrap global */
+	--wrap-color: var(--wrap-default-color);
+	--wrap-bgcolor: var(--wrap-default-bgcolor);
+    --wrap-dark-bgcolor: var(--wrap-default-dark-bgcolor);
+    /* container specific */
+    --wrap-note-color: var(--wrap-default-color);
+    --wrap-note-dark-bgcolor: var(--wrap-default-dark-bgcolor);
+    --wrap-snote-color: var(--wrap-default-color);
 }
-div.wrap_box,
+.wrap_quote {
+    --wrap-dark-bgcolor: none;
+}
+.wrap_hi {
+    --wrap-dark-bgcolor: var(--wrap-hi-bgcolor);
+}
+.wrap_em{
+    --wrap-color: var(--wrap-em-color);
+}
+.wrap_lo {
+    --wrap-color: var(--wrap-neutral-color);
+}
+.wrap_txt {
+    --wrap-color: inherit;
+}
+.wrap_spoiler {
+    --wrap-spoiler-bgcolor: var(--wrap-default-bgcolor);
+}
+
+/* setting css variables for all container classes,  colour attribute class types:           
+*/
+.wrap_red { 
+	--wrap-color: var(--wrap-red-color);
+}
+.wrap_red-bg {
+    --wrap-bgcolor: var(--wrap-red-bgcolor);
+    --wrap-dark-bgcolor: var(--wrap-red-dark-bgcolor);
+}
+.wrap_green { 
+	--wrap-color: var(--wrap-green-color);
+}
+.wrap_green-bg {
+    --wrap-bgcolor: var(--wrap-green-bgcolor);
+    --wrap-dark-bgcolor: var(--wrap-green-dark-bgcolor);
+}
+.wrap_purple { 
+	--wrap-color: var(--wrap-purple-color);
+}
+.wrap_purple-bg {
+    --wrap-bgcolor: var(--wrap-purple-bgcolor);
+    --wrap-dark-bgcolor: var(--wrap-purple-dark-bgcolor);
+}
+.wrap_orange { 
+	--wrap-color: var(--wrap-orange-color);
+}
+.wrap_orange-bg {
+    --wrap-bgcolor: var(--wrap-orange-bgcolor);
+    --wrap-dark-bgcolor: var(--wrap-orange-dark-bgcolor);
+}
+.wrap_blue { 
+	--wrap-color: var(--wrap-blue-color);
+}
+.wrap_blue-bg {
+    --wrap-bgcolor: var(--wrap-blue-bgcolor);
+    --wrap-dark-bgcolor: var(--wrap-blue-dark-bgcolor);
+}
+.wrap_yellow { 
+	--wrap-color: var(--wrap-yellow-color);
+}
+.wrap_yellow-bg {
+    --wrap-bgcolor: var(--wrap-yellow-bgcolor);
+    --wrap-dark-bgcolor: var(--wrap-yellow-dark-bgcolor);
+}
+.wrap_aqua { 
+	--wrap-color: var(--wrap-aqua-color);
+}
+.wrap_aqua-bg {
+    --wrap-bgcolor: var(--wrap-aqua-bgcolor);
+    --wrap-dark-bgcolor: var(--wrap-aqua-dark-bgcolor);
+}
+
+/* changing font relative size for block & inline
+*******************************************************************
+*/
+.wrap_smallest { font-size: 70%; }
+.wrap_smaller  { font-size: 85%; }
+.wrap_larger   { font-size: 115%; }
+.wrap_largest  { font-size: 130%; }
+
+/* changing border for block
+*******************************************************************
+*/
+div.wrap_border {
+    --wrap-box-border: 2px solid var(--wrap-color);
+    --wrap-note-border: 1px solid var(--wrap-color);
+    --wrap-quote-border: 2px solid var(--wrap-color);
+}
+
+/* container class type 'box' for block & inline
+*******************************************************************
+*/
+div.wrap_box {
+    padding: 1em 1em .5em 1em;
+    margin-bottom: 1.5em;
+    overflow: hidden;
+    background-color: var(--wrap-bgcolor);
+    color: var(--wrap-color);
+    border: var(--wrap-box-border);
+    &.wrap_shadow { 
+        box-shadow: 2px 2px 4px var(--wrap-color);
+    }
+}
+
+span.wrap_box {
+    padding: 0 .3em;
+    background-color: var(--wrap-bgcolor);
+    color: var(--wrap-color);
+}
+
+/* container class type 'snote' for block & inline safety notes
+********************************************************************
+   setting css variables for:
+   container class type 'snote' content class types:
+*/
+.wrap_danger {
+    --wrap-snote-color: var(--wrap-white-color); 
+    --wrap-snote-bgcolor: var(--wrap-danger-bgcolor);
+}
+.wrap_warning {
+    --wrap-snote-color: var(--wrap-black-color);
+    --wrap-snote-bgcolor: var(--wrap-warning-bgcolor);
+}
+.wrap_caution {
+    --wrap-snote-color: var(--wrap-black-color);
+    --wrap-snote-bgcolor: var(--wrap-caution-bgcolor);
+}
+.wrap_notice {
+    --wrap-snote-color: var(--wrap-white-color);
+    --wrap-snote-bgcolor: var(--wrap-notice-bgcolor);
+}
+.wrap_safety {
+    --wrap-snote-color: var(--wrap-white-color);
+    --wrap-snote-bgcolor: var(--wrap-safety-bgcolor);
+}
+
+/*____________ standaard safety notes ____________
+  present for backward compatibility
+*/
 div.wrap_danger,
 div.wrap_warning,
 div.wrap_caution,
@@ -20,168 +328,481 @@ div.wrap_safety {
     padding: 1em 1em .5em;
     margin-bottom: 1.5em;
     overflow: hidden;
+    background-color: var(--wrap-snote-bgcolor);
+    color: var(--wrap-snote-color);
 }
-span.wrap_box,
+
 span.wrap_danger,
 span.wrap_warning,
 span.wrap_caution,
 span.wrap_notice,
 span.wrap_safety {
     padding: 0 .3em;
+    background-color: var(--wrap-snote-bgcolor);
+    color: var(--wrap-snote-color);
+    overflow: hidden;
 }
 
-/*____________ notes with icons ____________*/
+/* container class : 'snote' 
+*/
+div.wrap_snote {
+    padding: 1em 1em .5em;
+    margin-bottom: 1.5em;
+    overflow: hidden;
+    background-color: var(--wrap-snote-bgcolor);
+    color: var(--wrap-snote-color);
+    &::before {
+        content: '';
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        height: .9em;
+        mask-image: var(--wrap-div-svg-safety);
+        mask-repeat: repeat;
+        -webkit-mask-image: var(--wrap-div-svg-safety);
+        -webkit-mask-repeat: repeat;
+        margin: -1em -1em .5em;
+        background-color: var(--wrap-snote-color);
+    }
+    &::after {
+        content: '';
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        height: .9em;
+        mask-image: var(--wrap-div-svg-safety);
+        mask-repeat: repeat;
+        -webkit-mask-image: var(--wrap-div-svg-safety);
+        -webkit-mask-repeat: repeat;
+        margin: -1em -1em -0.5em;
+        background-color:var(--wrap-snote-color);
+    }
+}
 
-/* general styles for all note divs */
-div.wrap_info,
-div.wrap_important,
+span.wrap_snote {
+    padding: 0 .3em;
+    background-color: var(--wrap-snote-bgcolor);
+    color: var(--wrap-snote-color);
+    overflow: hidden;
+    &::before {
+        content:'';
+        width: 2.6em;
+        height: 1.1em;
+        vertical-align: -0.25em;
+        margin: 0 .3em 0 0;
+        mask-image:var(--wrap-span-svg-safety);
+        mask-repeat:no-repeat;
+        -webkit-mask-image:var(--wrap-span-svg-safety);
+        -webkit-mask-repeat:no-repeat;
+        background-color:var(--wrap-snote-color);
+        display: inline-flex;
+        box-sizing: border-box;
+    }
+    &::after {
+        content:'';
+        width: 2.6em;
+        height: 1.1em;
+        vertical-align: -0.25em;
+        margin: 0 -0.4em 0 .3em;
+        mask-image:var(--wrap-span-svg-safety);
+        mask-repeat:no-repeat;
+        -webkit-mask-image:var(--wrap-span-svg-safety);
+        -webkit-mask-repeat:no-repeat;
+        background-color:var(--wrap-snote-color);
+        display: inline-flex;
+        box-sizing: border-box;
+    }
+}
+
+/*____________ standard notes with icons ____________
+  present for backward compatibility
+  setting css variables for the original notes:         
+*/
+
+.wrap_info { 
+    --wrap-standard-bgcolor: var(--wrap-blue-sbgcolor);
+    --wrap-standard-image: url(images/note/48/info.png); 
+    --wrap-span-image: url(images/note/16/info.png); 
+}
+.wrap_alert {
+    --wrap-standard-bgcolor: var(--wrap-red-sbgcolor);
+    --wrap-standard-image: url(images/note/48/alert.png); 
+    --wrap-span-image: url(images/note/16/alert.png); 
+}
+.wrap_download { 
+    --wrap-standard-bgcolor: var(--wrap-green-sbgcolor);
+    --wrap-standard-image: url(images/note/48/download.png); 
+    --wrap-span-image: url(images/note/16/download.png); 
+}
+.wrap_help { 
+    --wrap-standard-bgcolor: var(--wrap-purple-sbgcolor);
+    --wrap-standard-image: url(images/note/48/help.png); 
+    --wrap-span-image: url(images/note/16/help.png);
+}
+.wrap_important {
+    --wrap-standard-bgcolor: var(--wrap-orange-sbgcolor);
+    --wrap-standard-image: url(images/note/48/important.png); 
+    --wrap-span-image: url(images/note/16/important.png); 
+}
+.wrap_tip {
+    --wrap-standard-bgcolor: var(--wrap-yellow-sbgcolor);
+    --wrap-standard-image: url(images/note/48/tip.png); 
+    --wrap-span-image: url(images/note/16/tip.png);
+}
+.wrap_todo { 
+    --wrap-standard-bgcolor: var(--wrap-aqua-sbgcolor); 
+    --wrap-standard-image: url(images/note/48/todo.png); 
+    --wrap-span-image: url(images/note/16/todo.png);
+}   
+
 div.wrap_alert,
-div.wrap_tip,
+div.wrap_download,
 div.wrap_help,
-div.wrap_todo,
-div.wrap_download {
+div.wrap_important,
+div.wrap_info,
+div.wrap_tip,
+div.wrap_todo {
     padding: 1em 1em .5em 70px;
     margin-bottom: 1.5em;
     min-height: 68px;
     background-position: 10px 50%;
     background-repeat: no-repeat;
-    color: inherit;
+    color: var(--wrap-color);
     overflow: hidden;
+    background-color: var(--wrap-standard-bgcolor);
+    background-image: var(--wrap-standard-image);
 }
-/* general styles for all note spans */
-span.wrap_info,
-span.wrap_important,
+
 span.wrap_alert,
-span.wrap_tip,
+span.wrap_download,
 span.wrap_help,
-span.wrap_todo,
-span.wrap_download {
-    padding: 0 2px 0 20px;
-    min-height: 20px;
-    background-position: 2px 50%;
-    background-repeat: no-repeat;
+span.wrap_important,
+span.wrap_info,
+span.wrap_tip,
+span.wrap_todo {
+        padding: 0 2px 0 20px;
+        min-height: 20px;
+        background-position: 2px 50%;
+        background-repeat: no-repeat;
+        color: inherit;
+        background-color: var(--wrap-standard-bgcolor);
+        background-image: var(--wrap-span-image);
+}
+
+/* container class type 'note' for block & inline notes
+********************************************************************
+   setting css variables for:
+   container class type 'note', content class types:           
+*/
+.wrap_info { 
+    --wrap-note-color: var(--wrap-blue-color);
+    --wrap-note-dark-bgcolor: var(--wrap-blue-dark-bgcolor);
+    --wrap-div-modern-image: var(--wrap-div-svg-info);
+    --wrap-span-modern-image: var(--wrap-span-svg-info);
+}
+.wrap_alert {
+    --wrap-note-color: var(--wrap-red-color);
+    --wrap-note-dark-bgcolor: var(--wrap-red-dark-bgcolor);
+    --wrap-div-modern-image: var(--wrap-div-svg-alert);
+    --wrap-span-modern-image: var(--wrap-span-svg-alert);  
+}
+.wrap_download { 
+    --wrap-note-color: var(--wrap-green-color);
+    --wrap-note-dark-bgcolor: var(--wrap-green-dark-bgcolor);
+    --wrap-div-modern-image: var(--wrap-div-svg-download);
+    --wrap-span-modern-image: var(--wrap-span-svg-download);
+}
+.wrap_help { 
+    --wrap-note-color: var(--wrap-purple-color);
+    --wrap-note-dark-bgcolor: var(--wrap-purple-dark-bgcolor); 
+    --wrap-div-modern-image: var(--wrap-div-svg-help);
+    --wrap-span-modern-image: var(--wrap-span-svg-help); 
+}
+.wrap_important {
+    --wrap-note-color: var(--wrap-orange-color);
+    --wrap-note-dark-bgcolor: var(--wrap-orange-dark-bgcolor); 
+    --wrap-div-modern-image: var(--wrap-div-svg-important); 
+    --wrap-span-modern-image: var(--wrap-span-svg-important);
+}
+.wrap_tip {
+    --wrap-note-color: var(--wrap-yellow-color);
+    --wrap-note-dark-bgcolor: var(--wrap-yellow-dark-bgcolor);
+    --wrap-div-modern-image: var(--wrap-div-svg-tip);
+    --wrap-span-modern-image: var(--wrap-span-svg-tip); 
+}
+.wrap_todo { 
+    --wrap-note-color: var(--wrap-aqua-color);
+    --wrap-note-dark-bgcolor: var(--wrap-aqua-dark-bgcolor);
+    --wrap-div-modern-image: var(--wrap-div-svg-todo);
+    --wrap-span-modern-image: var(--wrap-span-svg-todo);
+}   
+
+/* container class: 'note'
+*/
+div.wrap_note {
+    margin-bottom: 1.5em;
+    min-height: auto;
+    color: var(--wrap-color);
+    overflow: hidden;
+    border: var(--wrap-note-border); 
+    background-image: none; /* ignore standard image */
+    &.wrap_round {
+        border-radius: 5px;
+    }
+    /* layout style 'basic' */
+    &.wrap_basic {
+        padding: 1em 1em 0 1.5em;
+        border-left: .4em solid var(--wrap-note-color);
+        background-color: var(--wrap-bgcolor);
+        * { 
+            margin-top: 0;
+        }
+    }    
+    /* layout style 'basic-ico' (basic + modern icon) */
+    &.wrap_basic-icon {
+        padding: 1em 1em 0 4em;
+        border-left: .4em solid var(--wrap-note-color);
+        background-color: var(--wrap-bgcolor);
+        &::before {
+            content: '';
+            width: 2.2em;
+            height: 2.2em;
+            margin-right: 0.8em;
+            margin-left: -3.1em;
+            box-sizing: border-box;
+            position: absolute;
+            display: block;
+            mask-image: var(--wrap-div-modern-image);
+            mask-repeat: no-repeat;
+            -webkit-mask-image:var(--wrap-div-modern-image);
+            -webkit-mask-repeat:no-repeat;
+            background-color:var(--wrap-note-color);
+        }
+        * { 
+            margin-top: 0;
+        }
+    } 
+    /* layout style 'modern' */
+    &.wrap_modern {
+        padding: 1em 1em 0 4em;
+        border-left: .4em solid var(--wrap-note-color);
+        background-color: var(--wrap-bgcolor);
+        h3, h4 {
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            height: 2.4em;
+            padding-left: 1.2em;
+            margin: -1em -1em .5em -4em;
+            background-color: var(--wrap-note-dark-bgcolor);
+            border-bottom: var(--wrap-note-border);
+            &::before {
+                content: '';
+                width: 2em;
+                height: 2em;
+                margin-right: 0.8em;
+                mask-image: var(--wrap-div-modern-image);
+                mask-repeat: no-repeat;
+                -webkit-mask-image:var(--wrap-div-modern-image);
+                -webkit-mask-repeat:no-repeat;
+                background-color: var(--wrap-note-color);
+            }
+        }
+    }
+    &.wrap_condensed {
+        padding: 1em 1em 1em 1.5em;
+        background-color: var(--wrap-bgcolor);
+        /* layout style default */
+        &::before {
+            content:'';
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: -0.25em;
+            margin-right: .2em;
+            mask-image:var(--wrap-span-modern-image);
+            mask-repeat:no-repeat;
+            -webkit-mask-image:var(--wrap-span-modern-image);
+            -webkit-mask-repeat:no-repeat;
+            background-color:var(--wrap-note-color);
+            display: inline-flex;
+            box-sizing: border-box;
+        }
+        h3, h4, p { 
+            display: inline 
+        }
+    }
+    
+}
+
+span.wrap_note {
+    padding: 0 .3em;
+    overflow: hidden;
     color: inherit;
+    background-image: none; /* ignore standard image */
+    background-color: var(--wrap-note-dark-bgcolor);
+     /* layout style default */
+    &::before {
+        content:'';
+        width: 1.2em;
+        height: 1.2em;
+        vertical-align: -0.25em;
+        margin-right: .2em;
+        mask-image:var(--wrap-span-modern-image);
+        mask-repeat:no-repeat;
+        -webkit-mask-image:var(--wrap-span-modern-image);
+        -webkit-mask-repeat:no-repeat;
+        background-color:var(--wrap-note-color);
+        display: inline-flex;
+        box-sizing: border-box;
+    }
 }
 
-/* sorry for icons glued to the right side, but there is currently no way
-     to make this look good without adjusting the images themselves */
-[dir=rtl] div.wrap_info,
-[dir=rtl] div.wrap_important,
-[dir=rtl] div.wrap_alert,
-[dir=rtl] div.wrap_tip,
-[dir=rtl] div.wrap_help,
-[dir=rtl] div.wrap_todo,
-[dir=rtl] div.wrap_download {
-    padding: 1em 60px .5em 1em;
-    background-position: right 50%;
+/* container class type 'quote' 
+*******************************************************************
+   setting css variables for container class type 'quote'
+   content class types:
+*/
+
+.wrap_qmark-up {
+    --wrap-quote-image: var(--wrap-svg-quote-up);
 }
-[dir=rtl] span.wrap_info,
-[dir=rtl] span.wrap_important,
-[dir=rtl] span.wrap_alert,
-[dir=rtl] span.wrap_tip,
-[dir=rtl] span.wrap_help,
-[dir=rtl] span.wrap_todo,
-[dir=rtl] span.wrap_download {
-    padding: 0 18px 0 2px;
-    background-position: right 50%;
+.wrap_qmark-down{
+    --wrap-quote-image: var(--wrap-svg-quote-down); 
 }
 
-/*____________ info ____________*/
-.wrap_info { background-color: #d1d7df; }
-.wrap__dark.wrap_info { background-color: #343e4a; }
-div.wrap_info { background-image: url(images/note/48/info.png); }
-span.wrap_info { background-image: url(images/note/16/info.png); }
-
-/*____________ important ____________*/
-.wrap_important { background-color: #ffd39f; }
-.wrap__dark.wrap_important { background-color: #6c3b00; }
-div.wrap_important { background-image: url(images/note/48/important.png); }
-span.wrap_important { background-image: url(images/note/16/important.png); }
-
-/*____________ alert ____________*/
-.wrap_alert { background-color: #ffbcaf; }
-.wrap__dark.wrap_alert { background-color: #6b1100; }
-div.wrap_alert { background-image: url(images/note/48/alert.png); }
-span.wrap_alert { background-image: url(images/note/16/alert.png); }
-
-/*____________ tip ____________*/
-.wrap_tip { background-color: #fff79f; }
-.wrap__dark.wrap_tip { background-color: #4a4400; }
-div.wrap_tip { background-image: url(images/note/48/tip.png); }
-span.wrap_tip { background-image: url(images/note/16/tip.png); }
-
-/*____________ help ____________*/
-.wrap_help { background-color: #dcc2ef; }
-.wrap__dark.wrap_help { background-color: #3c1757; }
-div.wrap_help { background-image: url(images/note/48/help.png); }
-span.wrap_help { background-image: url(images/note/16/help.png); }
-
-/*____________ todo ____________*/
-.wrap_todo { background-color: #c2efdd; }
-.wrap__dark.wrap_todo { background-color: #17573e; }
-div.wrap_todo { background-image: url(images/note/48/todo.png); }
-span.wrap_todo { background-image: url(images/note/16/todo.png); }
-
-/*____________ download ____________*/
-.wrap_download { background-color: #d6efc2; }
-.wrap__dark.wrap_download { background-color: #345717; }
-div.wrap_download { background-image: url(images/note/48/download.png); }
-span.wrap_download { background-image: url(images/note/16/download.png); }
-
-
-/*____________ safety notes ____________*/
-
-.wrap_danger {
-    background-color: #c00;
-    color: #fff;
-}
-.wrap_warning {
-    background-color: #f60;
-    color: #000;
-}
-.wrap_caution {
-    background-color: #ff0;
-    color: #000;
-}
-.wrap_notice {
-    background-color: #06f;
-    color: #fff;
-}
-.wrap_safety {
-    background-color: #090;
-    color: #fff;
+/* container class: 'quote'
+*/
+div.wrap_quote {
+    padding: 0 1em 0;
+    margin: 2em auto;
+    overflow: hidden;
+    max-width: 90%;
+    background-color: var(--wrap-bgcolor);
+    color: var(--wrap-color);
+    border: var(--wrap-quote-border);
+    &.wrap_round {
+        border-radius: .5em;
+    }
+    &.wrap_shadow { 
+        box-shadow: 2px 2px 4px var(--wrap-color);
+    }
+    /* optional layout styles */
+    &.wrap_qmark-up::before,
+    &.wrap_qmark-down::before {
+        content: '';
+        width: 3em;
+        height: 3em;
+        margin: .6em 0 -1em;
+        mask-image: var(--wrap-quote-image);
+        mask-repeat: no-repeat;
+        -webkit-mask-image:var(--wrap-quote-image);
+        -webkit-mask-repeat:no-repeat;
+        background-color: var(--wrap-color);
+        display: block;
+    }
+    /* default layout style */
+    p {
+        padding: .5em 1em 0em 1.2em;
+        margin: 1.2em 0 0 .6em;
+        border: 0;
+        color: var(--wrap-color);
+        font-weight: normal;
+    }
+    /* citation text */
+    span.wrap_cite { 
+        font-style: italic;
+        text-align: right;
+        display: block;
+        margin: 1em .5em 1em .5em;
+        font-size: smaller;
+        &::before {
+            content: "—";
+            margin: 0 .5em 0;
+        }
+    }        
 }
 
-.wrap_danger *,
-.wrap_warning *,
-.wrap_caution *,
-.wrap_notice *,
-.wrap_safety * {
-    color: inherit !important;
+span.wrap_quote {
+    overflow: hidden;
+    color: var(--wrap-color);
+    background-color: var(--wrap-dark-bgcolor);
+     /* layout style default */
+    &::before {
+        content:'';
+        width: 1em;
+        height: 1em;   
+        mask-image:var(--wrap-svg-quote-up);
+        mask-repeat:no-repeat;
+        -webkit-mask-image:var(--wrap-svg-quote-up);
+        -webkit-mask-repeat:no-repeat;
+        background-color:var(--wrap-color);
+        display: inline-flex;
+        box-sizing: border-box;
+    }
+    &::after {
+        content:'';
+        width: 1em;
+        height: 1em;
+        mask-image:var(--wrap-span-svg-quote-down);
+        mask-repeat:no-repeat;
+        -webkit-mask-image:var(--wrap-svg-quote-down);
+        -webkit-mask-repeat:no-repeat;
+        background-color:var(--wrap-color);
+        display: inline-flex;
+        box-sizing: border-box;
+    }
+}
+ 
+/* container class type 'announce' 
+*******************************************************************
+*/
+div.wrap_announce {
+    padding: 1em 1em .5em;
+    margin-bottom: 1.5em;
+    overflow: hidden;
+    color: var(--wrap-color);
+    background-color: var(--wrap-bgcolor);
+    border: 2px solid var(--wrap-dark-bgcolor);
+    &.wrap_round {
+        border-radius: .5em;
+    }
+    &.wrap_shadow { 
+        box-shadow: 2px 2px 4px var(--wrap-dark-bgcolor);
+    }
+    /* default layout style */
+    h3, h4 {
+    padding: .2em 1em .2em;
+    margin: -1em -1em .5em;
+    border: 0;
+    color: var(--wrap-color);
+    background-color: var(--wrap-dark-bgcolor);
+    }
 }
 
-
-/* mark
+/* mark 
+see also all.less for lo & em
 ********************************************************************/
 
 .wrap_hi {
-    background-color: #ff9;
+    background-color: var(--wrap-dark-bgcolor);
     overflow: hidden;
 }
-.wrap__dark.wrap_hi {
-    background-color: #4e4e0d;
+.wrap_lo, 
+.wrap_em, 
+.wrap_txt {
+    color: var(--wrap-color);
 }
 
-
 /* miscellaneous
-********************************************************************/
+*******************************************************************
+*/
 
 /*____________ spoiler ____________*/
 
 .wrap_spoiler {
-    background-color: @ini_background !important;
-    color: @ini_background !important;
-    border: 1px dotted red;
+    background-color:var(--wrap-spoiler-bgcolor);;
+    color: var(--wrap-spoiler-bgcolor);
+    border: 1px dotted var(--wrap-spoiler-color);
 }
 
 /*____________ only print ____________*/
@@ -201,7 +822,7 @@ span.wrap_download { background-image: url(images/note/16/download.png); }
 
 .wrap_button a:link,
 .wrap_button a:visited {
-    background-color: @ini_background_alt;
+    background-color: var(--wrap-alt-bgcolor);
 }
 .wrap_button a:link:hover,
 .wrap_button a:visited:hover,
@@ -209,7 +830,77 @@ span.wrap_download { background-image: url(images/note/16/download.png); }
 .wrap_button a:visited:focus,
 .wrap_button a:link:active,
 .wrap_button a:visited:active {
-    background-color: @ini_background_neu;
+    background-color: var(--wrap-neutral-bgcolor);
 }
 
-} /* /.dokuwiki */
+} /* end of .dokuwiki */
+
+
+/*____________notes with right to left text ____________
+*/
+[dir=rtl] .dokuwiki {
+
+    /*____________ standaard notes ____________
+        present for backward compatibility
+    */
+
+    /* sorry for icons glued to the right side, but there is currently no way
+        to make this look good without adjusting the images themselves */
+    div.wrap_alert,
+    div.wrap_download,
+    div.wrap_help,
+    div.wrap_important,
+    div.wrap_info,
+    div.wrap_tip,
+    div.wrap_todo {
+        padding: 1em 60px .5em 1em;
+        background-position: right 50%;
+        }
+
+    span.wrap_alert,
+    span.wrap_download,
+    span.wrap_help,
+    span.wrap_important,
+    span.wrap_info,
+    span.wrap_tip,
+    span.wrap_todo {
+        padding: 0 18px 0 2px;
+        background-position: right 50%;
+    }
+
+    /*____________ new notes ____________
+    */
+    div.wrap_note {
+        &.wrap_basic {
+            padding: 1em 1.5em 0 1em;
+            border: var(--wrap-note-border); 
+            border-right: 5px solid var(--wrap-note-color);
+        }
+        &.wrap_basic-icon {
+            padding: 1em 4em 0 1em;
+            border: var(--wrap-note-border); 
+            border-right: 5px solid var(--wrap-note-color);
+            &::before {
+                margin-left: 0.8em;
+                margin-right: -3.1em;
+            }
+        }
+        &.wrap_modern {
+            padding: 1em 4em 0 1em;
+            border: var(--wrap-note-border); 
+            border-right: 5px solid var(--wrap-note-color);
+            h3, h4 {
+                padding-right: 1.2em;
+                margin: -1em -4em .5em -1em;
+                &::before {
+                margin-right: 0.8em;
+                }
+            }
+        }
+    }
+
+    div.wrap_quote span.wrap_cite {
+        text-align: left;
+    } 
+  
+} /* end of [dir=rtl] .dokuwiki */

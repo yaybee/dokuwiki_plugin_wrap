@@ -19,3 +19,11 @@ $lang['clear']                 = 'reset drijvende blokken (clear floats)';
 $lang['em']                    = 'bijzonder benadrukken';
 $lang['hi']                    = 'gemarkeerd';
 $lang['lo']                    = 'minder belangrijk';
+
+$lang['alert-text']            = 'Waarschuwing';
+$lang['download-text']         = 'Download';
+$lang['help-text']             = 'Hulp';
+$lang['info-text']             = 'Informatie';
+$lang['important-text']        = 'Belangrijk';
+$lang['tip-text']              = 'Tip';
+$lang['todo-text']             = 'Te doen';

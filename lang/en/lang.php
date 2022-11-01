@@ -17,3 +17,11 @@ $lang['clear']     = 'clear floats';
 $lang['em']        = 'especially emphasised';
 $lang['hi']        = 'highlighted';
 $lang['lo']        = 'less significant';
+
+$lang['alert-text']     = 'Alert';
+$lang['download-text']  = 'Download';
+$lang['help-text']      = 'Help';
+$lang['info-text']      = 'Info';
+$lang['important-text'] = 'Important';
+$lang['tip-text']       = 'Tip';
+$lang['todo-text']      = 'To do';

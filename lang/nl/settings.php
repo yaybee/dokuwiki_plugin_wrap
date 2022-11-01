@@ -13,5 +13,12 @@ $lang['restrictionType_o_0']   = 'alle klassen zijn toegestaan, behalve de boven
 $lang['restrictionType_o_1']   = 'beperk de toegestane klassen tot de bovenstaande, en geen anderen';
 $lang['syntaxDiv']             = 'Welke syntax moet worden gebruikt in het werkbalk-keuzemenu voor blok-wraps?';
 $lang['syntaxSpan']            = 'Welke syntax moet worden gebruikt in het werkbalk-keuzemenu voor inline-wraps?';
-$lang['darkTpl']               = 'Optimaliseer de kleuren voor donkere templates?';
+$lang['darkTpl']               = 'Optimaliseer de kleuren voor donkere templates? Gebruik dit alleen indien je donkere template de attribuut: theme="dark" op de HTML tag niet ondersteunt!';
 $lang['emulatedHeadlines']     = 'Nagebootste kopteksten gebruiken (verouderd)';
+
+$lang['syntaxNoteMode']         = 'Gebruikte soort blok in het werkbalk-keuzemenu voor blok-wraps';
+$lang['syntaxNoteAlign']        = 'Gebruikte plaatsing van blok op pagina in het werkbalk-keuzemenu voor blok-wraps';
+$lang['syntaxNoteType']         = 'Gebruikte hoeken voor blok in het werkbalk-keuzemenu voor blok-wraps';
+$lang['syntaxNoteSize']         = 'Gebruikte verticale grootte voor blok in het werkbalk-keuzemenu voor blok-wraps, bv. 60%, 300px, 20em';
+$lang['syntaxNoteHeading']      = 'Automatisch koptext toevoegen aan alle blok typen in het werkbalk-keuzemenu?';
+$lang['syntaxNoteHeadingSize']  = 'Font grootte van de automatisch toe te voegen koptext';
